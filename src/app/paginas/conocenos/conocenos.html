@@ -1,0 +1,628 @@
+<!-- ══════════════════════════════════════════════════════
+     HERO IMAGE
+═══════════════════════════════════════════════════════ -->
+<section
+  class="relative w-full h-[260px] sm:h-[380px] md:h-[460px] lg:h-[520px] overflow-hidden bg-slate-900"
+>
+  <img
+    src="assets/imagenes/home_monte1.jpg"
+    alt="Paisaje de montaña – Aitona-Amonak"
+    class="w-full h-full object-cover select-none"
+  />
+  <!-- Subtle gradient overlay -->
+  <div
+    class="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-slate-950/60"
+  ></div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     INTRO TEXT
+═══════════════════════════════════════════════════════ -->
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
+  <div
+    class="relative bg-white rounded-3xl border border-slate-100 shadow-sm p-6 sm:p-10 overflow-hidden"
+  >
+    <!-- Decorative glow -->
+    <div
+      class="absolute top-0 right-0 w-40 h-40 bg-lime-500/5 rounded-full blur-3xl pointer-events-none"
+    ></div>
+
+    <div class="flex items-center gap-3 mb-5">
+      <div class="w-1 h-10 bg-gradient-to-b from-lime-400 to-emerald-600 rounded-full"></div>
+      <div>
+        <span class="block text-[10px] font-black text-lime-600 uppercase tracking-widest mb-0.5"
+          >Conócenos</span
+        >
+        <h1 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight leading-tight">
+          Club de Montaña <span class="text-lime-600">Aitona-Amonak</span>
+        </h1>
+      </div>
+    </div>
+
+    <p class="text-slate-600 text-base sm:text-lg leading-relaxed">
+      El Club de Montaña <strong class="text-slate-800">"AITONA-AMONAK"</strong> fundado en
+      noviembre de 1983, está formado por quienes hemos dejado atrás nuestra vida laboral:
+      pensionistas, jubilados y jubiladas y sus cónyuges, a quienes nos une la pasión por la montaña
+      y la naturaleza, siendo el fin de la asociación el logro del
+      <strong class="text-lime-700">Envejecimiento Activo.</strong>
+    </p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════
+     SWIPEABLE TABS
+═══════════════════════════════════════════════════════ -->
+<section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 pb-16 sm:pb-24">
+  <!-- ── Tab bar ── -->
+  <div class="tab-bar-scroll mb-6">
+    <div
+      class="flex gap-1 min-w-max sm:min-w-0 bg-slate-100 p-1 rounded-2xl border border-slate-200/60"
+    >
+      @for (tab of tabs; track $index) {
+        <button
+          (click)="goToTab($index)"
+          class="flex-1 min-w-[120px] sm:min-w-0 px-4 py-2.5 text-sm font-bold rounded-xl transition-all duration-250 select-none cursor-pointer whitespace-nowrap"
+          [class.bg-white]="activeTab() === $index"
+          [class.text-lime-700]="activeTab() === $index"
+          [class.shadow-sm]="activeTab() === $index"
+          [class.text-slate-500]="activeTab() !== $index"
+          [class.hover:text-slate-700]="activeTab() !== $index"
+        >
+          {{ tab }}
+        </button>
+      }
+    </div>
+  </div>
+
+  <!-- ── Slider wrapper ── -->
+  <div
+    class="overflow-hidden rounded-3xl border border-slate-100 shadow-sm bg-white"
+    (touchstart)="onTouchStart($event)"
+    (touchend)="onTouchEnd($event)"
+  >
+    <div class="tabs-track" [style.transform]="'translateX(-' + activeTab() * 100 + '%)'">
+      <!-- ════════ TAB 1: CÓMO PARTICIPAR ════════ -->
+      <div class="tab-panel p-6 sm:p-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-lime-100 p-2.5 rounded-xl">
+            <svg
+              class="w-5 h-5 text-lime-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">Cómo Participar y Asociarse</h2>
+        </div>
+
+        <p class="text-slate-600 leading-relaxed mb-6">
+          La Asociación Club de Montaña Aitona-Amonak no es un club de personas jubiladas, aunque sí
+          estamos en esa situación o somos pensionistas con más de 50 años de edad.
+        </p>
+
+        <div class="space-y-6">
+          <div>
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Son fines de la asociación:
+            </h3>
+            <ul class="space-y-2 text-slate-600 text-sm leading-relaxed">
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span
+                  >Fomentar el amor y respeto por la naturaleza, así como la práctica del ejercicio
+                  físico.</span
+                >
+              </li>
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span
+                  >Favorecer y estimular la amistad y hermandad entre quienes la componen mediante
+                  la sana convivencia montañera.</span
+                >
+              </li>
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span
+                  >Para ello se organizan salidas montañeras todos los miércoles del año, excepto
+                  los meses de julio y agosto, por Navarra y provincias limítrofes.</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Cómo registrarse
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed mb-2">
+              Deberás acreditar que cumples los requisitos establecidos en los Estatutos:
+            </p>
+            <ul class="space-y-1.5 text-slate-600 text-sm">
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span
+                  >Ser persona jubilada, prejubilada, tener contrato relevo, o ser cónyuge de
+                  persona asociada, y en caso contrario se someterá a criterio de la Junta.</span
+                >
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Tus obligaciones
+            </h3>
+            <ul class="space-y-1.5 text-slate-600 text-sm">
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span
+                  >Será obligatorio a partir de la segunda salida estar federado en la Federación de
+                  Montaña, o abonar la cuota del seguro de la asociación.</span
+                >
+              </li>
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span>Realizar, habitualmente, como mínimo, el recorrido de la ruta Media.</span>
+              </li>
+              <li class="flex gap-2">
+                <span class="text-lime-500 font-bold mt-0.5">–</span
+                ><span>Seguir la ruta establecida y entre los guías.</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Condición de socio/a
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Se adquiere al final del año, y si no hay plazas suficientes para quienes lo
+              solicitan, el orden de admisión lo establece el número de excursiones realizadas.
+            </p>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Billetes de autobús
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Podrán solicitarlo por internet, o presencialmente el
+              <strong class="text-slate-700">LUNES</strong> de las 10:30 h a las 10:45 h y reservar
+              dos plazas. A las 11:00 h, una vez se conocen las plazas que han quedado disponibles
+              de la venta a socios y socias, se asignarán a los No Asociados que lo hayan
+              solicitado.
+            </p>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Calendario anual
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Aunque está disponible en esta web, se te entregará uno impreso. En él encontrarás,
+              además de las salidas de todo el año, informaciones relevantes como horarios,
+              teléfonos de guías, etc.
+            </p>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <h3 class="font-black text-slate-800 uppercase tracking-wide text-sm mb-2">
+              Web y Blog
+            </h3>
+            <p class="text-slate-600 text-sm leading-relaxed">
+              Además del calendario de rutas, encontrarás los tracks para poder descargarlos en tu
+              GPS y la información de última hora. También el acceso al blog con información de las
+              rutas anteriores, fotografías, datos, etc.
+            </p>
+          </div>
+
+          <div class="border-t border-slate-100 pt-5">
+            <a
+              href="#"
+              class="inline-flex items-center gap-2 bg-gradient-to-r from-lime-500 to-emerald-600 text-white font-bold text-sm px-6 py-3 rounded-xl shadow-md shadow-lime-500/20 hover:shadow-lime-500/35 hover:-translate-y-0.5 transition-all duration-300"
+            >
+              <svg
+                class="w-4 h-4"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2.5"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                />
+              </svg>
+              Acceso al Programa Diario
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ TAB 2: HISTORIA ════════ -->
+      <div class="tab-panel p-6 sm:p-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-amber-100 p-2.5 rounded-xl">
+            <svg
+              class="w-5 h-5 text-amber-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+              />
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">Nuestra Historia</h2>
+        </div>
+
+        <div
+          class="prose prose-slate max-w-none text-slate-600 text-sm sm:text-base leading-relaxed space-y-4"
+        >
+          <p>
+            Un <strong class="text-slate-800">9 de noviembre de 1983</strong>, se convocó a todos
+            los jubilados y jubiladas de Pamplona a los que les gustara el monte para realizar una
+            salida. Y así en la cumbre de
+            <strong class="text-slate-800">San Cristóbal (Ezkaba)</strong>, se encontraron
+            veintitrés personas hombres y mujeres, <em>"la mayoría desconocidas entre sí"</em>.
+          </p>
+          <p>
+            Fue en la cima a <strong class="text-slate-800">892 metros</strong>, en un hueco en el
+            lado norte, donde se colocó la placa conmemorativa de la fundación Aitonak. Además, se
+            tomaron tres acuerdos claros y contundentes:
+          </p>
+          <ol class="list-none space-y-2">
+            <li class="flex gap-3">
+              <span
+                class="bg-lime-100 text-lime-700 font-black text-xs px-2 py-1 rounded-lg shrink-0 self-start mt-0.5"
+                >1</span
+              ><span
+                >Fundar un club de jubilados y jubiladas y nombrar la primera Junta Directiva.</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <span
+                class="bg-lime-100 text-lime-700 font-black text-xs px-2 py-1 rounded-lg shrink-0 self-start mt-0.5"
+                >2</span
+              ><span
+                >Bautizar el club con el nombre de Aitonak, y en 2026 pasó a ser
+                <strong class="text-slate-800">Aitona-Amonak</strong>.</span
+              >
+            </li>
+            <li class="flex gap-3">
+              <span
+                class="bg-lime-100 text-lime-700 font-black text-xs px-2 py-1 rounded-lg shrink-0 self-start mt-0.5"
+                >3</span
+              ><span>Compromiso de salir al monte todos los miércoles.</span>
+            </li>
+          </ol>
+
+          <div class="bg-amber-50 border border-amber-200/70 rounded-2xl p-5 my-6">
+            <h3 class="font-black text-amber-900 text-base mb-2">AITONAK · 25 Aniversario</h3>
+            <p class="text-amber-800 text-sm leading-relaxed">
+              En 2008, al cumplirse 25 años de la fundación, se hizo el esfuerzo de recopilar los
+              eventos y avatares de la asociación en ese tiempo, imprimiéndose el libro
+              <em>"Historia de un grupo humano navarro"</em>.
+            </p>
+          </div>
+
+          <p>Puedes leer o descargar el libro desde estos capítulos:</p>
+          <ul class="space-y-1.5 text-sm">
+            @for (chapter of historyChapters; track $index) {
+              <li>
+                <a
+                  href="#"
+                  class="inline-flex items-center gap-1.5 text-lime-700 hover:text-lime-900 font-semibold transition-colors duration-150"
+                >
+                  <svg
+                    class="w-3.5 h-3.5 shrink-0"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"
+                    />
+                  </svg>
+                  {{ chapter }}
+                </a>
+              </li>
+            }
+          </ul>
+        </div>
+      </div>
+
+      <!-- ════════ TAB 3: HIMNO ════════ -->
+      <div class="tab-panel p-6 sm:p-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-purple-100 p-2.5 rounded-xl">
+            <svg
+              class="w-5 h-5 text-purple-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M9 19V6l12-3v13M9 19c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zm12-3c0 1.105-1.343 2-3 2s-3-.895-3-2 1.343-2 3-2 3 .895 3 2zM9 10l12-3"
+              />
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">Nuestro Himno</h2>
+        </div>
+
+        <div
+          class="bg-gradient-to-br from-slate-50 to-lime-50/30 rounded-2xl border border-slate-200/60 p-6 sm:p-8"
+        >
+          <h3 class="text-center font-black text-slate-800 text-lg uppercase tracking-widest mb-8">
+            Himno de Aitona-Amonak
+          </h3>
+
+          <div
+            class="space-y-6 text-slate-700 text-sm sm:text-base leading-relaxed text-center font-medium"
+          >
+            <div>
+              <p>Aitonak, palabra recia</p>
+              <p>llena de fe y fuerza real,</p>
+              <p>horizonte que mira</p>
+              <p>sin llegar nunca alcanzar.</p>
+              <p class="mt-2">Con la savia de mil tierras</p>
+              <p>que el viento quiso juntar,</p>
+              <p>ha crecido altivo y fuerte</p>
+              <p>este roble Aitonak.</p>
+            </div>
+
+            <div class="bg-lime-100/70 border-l-4 border-lime-500 px-6 py-4 rounded-r-xl text-left">
+              <p>Nuestro lema "Naturaleza",</p>
+              <p>que es cultura en general,</p>
+              <p>ella es la madre que nos da vida</p>
+              <p>y hay que amarla de verdad.</p>
+              <p class="mt-2">Vamos a darnos todos la mano</p>
+              <p>este tronco al abrazar,</p>
+              <p>con un grito fuerte y sereno,</p>
+              <p class="font-black text-lime-700">¡Gora, Viva, Aitonak!</p>
+            </div>
+
+            <div>
+              <p>Su moral está forjada</p>
+              <p>por el duro caminar,</p>
+              <p>caminando, más se forja,</p>
+              <p class="font-bold">¡Adelante, Aitonak!</p>
+              <p class="mt-2">Aquí nadie es más que nadie,</p>
+              <p>todos somos de un igual</p>
+              <p>y formamos este tronco</p>
+              <p>que es el roble Aitonak.</p>
+            </div>
+
+            <div class="bg-lime-100/70 border-l-4 border-lime-500 px-6 py-4 rounded-r-xl text-left">
+              <p>Nuestro lema "Naturaleza",</p>
+              <p>que es cultura en general,</p>
+              <p>ella es la madre que nos da vida</p>
+              <p>y hay que amarla de verdad.</p>
+              <p class="mt-2">Vamos a darnos todos la mano</p>
+              <p>este tronco al abrazar,</p>
+              <p>con un grito fuerte y sereno,</p>
+              <p class="font-black text-lime-700">¡Gora, Viva, Aitonak!</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ════════ TAB 4: CONTACTO ════════ -->
+      <div class="tab-panel p-6 sm:p-10">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="bg-sky-100 p-2.5 rounded-xl">
+            <svg
+              class="w-5 h-5 text-sky-700"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+              />
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+              />
+            </svg>
+          </div>
+          <h2 class="text-xl sm:text-2xl font-black text-slate-800">Dónde Estamos · Contacto</h2>
+        </div>
+
+        <!-- Contact details -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+          <div class="flex items-start gap-3 bg-slate-50 rounded-2xl border border-slate-100 p-4">
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-xs shrink-0">
+              <svg
+                class="w-4 h-4 text-slate-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <span
+                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5"
+                >Horario</span
+              >
+              <p class="text-sm text-slate-700 font-semibold leading-snug">
+                Lunes y jueves de 10:00 a 12:00 h<br /><span
+                  class="text-slate-500 font-normal text-xs"
+                  >Excepto julio y agosto</span
+                >
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 bg-slate-50 rounded-2xl border border-slate-100 p-4">
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-xs shrink-0">
+              <svg
+                class="w-4 h-4 text-slate-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
+                />
+              </svg>
+            </div>
+            <div>
+              <span
+                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5"
+                >Teléfono</span
+              >
+              <p class="text-sm text-slate-700 font-semibold">948 230342</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 bg-slate-50 rounded-2xl border border-slate-100 p-4">
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-xs shrink-0">
+              <svg
+                class="w-4 h-4 text-slate-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
+                />
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+                />
+              </svg>
+            </div>
+            <div>
+              <span
+                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5"
+                >Dirección</span
+              >
+              <p class="text-sm text-slate-700 font-semibold leading-snug">
+                Calle Estafeta 47-1º<br />31001 · Pamplona
+              </p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-3 bg-slate-50 rounded-2xl border border-slate-100 p-4">
+            <div class="bg-white p-2 rounded-xl border border-slate-100 shadow-xs shrink-0">
+              <svg
+                class="w-4 h-4 text-slate-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+            <div>
+              <span
+                class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-0.5"
+                >Email</span
+              >
+              <a
+                href="mailto:Aitonak83@gmail.com"
+                class="text-sm text-sky-600 font-semibold hover:text-sky-800 transition-colors"
+                >Aitonak83&#64;gmail.com</a
+              >
+            </div>
+          </div>
+        </div>
+
+        <!-- Google Maps iframe -->
+        <div class="map-container shadow-md">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2921.4597095428!2d-1.6435!3d42.8172!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd508f56beefdfef%3A0x5a2e2f5a5a2e2f5a!2sCalle%20Estafeta%2047%2C%2031001%20Pamplona!5e0!3m2!1ses!2ses!4v1691000000000!5m2!1ses!2ses"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Ubicación Aitona-Amonak"
+          ></iframe>
+        </div>
+      </div>
+    </div>
+    <!-- end .tabs-track -->
+  </div>
+  <!-- end slider wrapper -->
+
+  <!-- ── Prev / Next navigation ── -->
+  <div class="flex items-center justify-between mt-6 px-1">
+    <button
+      (click)="prevTab()"
+      class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-lime-700 disabled:opacity-30 disabled:cursor-default transition-colors duration-200 cursor-pointer"
+      [disabled]="activeTab() === 0"
+    >
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+      {{ activeTab() > 0 ? tabs[activeTab() - 1] : '' }}
+    </button>
+
+    <!-- Dot indicators -->
+    <div class="flex gap-2">
+      @for (tab of tabs; track $index) {
+        <button
+          (click)="goToTab($index)"
+          class="h-2 rounded-full transition-all duration-300 cursor-pointer focus:outline-none"
+          [class.w-6]="activeTab() === $index"
+          [class.bg-lime-500]="activeTab() === $index"
+          [class.w-2]="activeTab() !== $index"
+          [class.bg-slate-300]="activeTab() !== $index"
+          [attr.aria-label]="'Ir a ' + tab"
+        ></button>
+      }
+    </div>
+
+    <button
+      (click)="nextTab()"
+      class="inline-flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-lime-700 disabled:opacity-30 disabled:cursor-default transition-colors duration-200 cursor-pointer"
+      [disabled]="activeTab() === tabs.length - 1"
+    >
+      {{ activeTab() < tabs.length - 1 ? tabs[activeTab() + 1] : '' }}
+      <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</section>
