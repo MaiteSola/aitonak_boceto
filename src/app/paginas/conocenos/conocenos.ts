@@ -1,8 +1,10 @@
 import { Component, signal } from '@angular/core';
+import { Navbar } from '../../compartidas/navbar/navbar';
+import { Footer } from '../../compartidas/footer/footer';
 
 @Component({
   selector: 'app-conocenos',
-  imports: [],
+  imports: [Navbar, Footer],
   templateUrl: './conocenos.html',
   styleUrl: './conocenos.scss',
 })
