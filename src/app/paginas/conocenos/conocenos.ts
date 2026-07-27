@@ -2,6 +2,7 @@ import { Component, effect, inject, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-conocenos',
@@ -11,6 +12,7 @@ import { Footer } from '../../compartidas/footer/footer';
 })
 export class Conocenos {
   route = inject(ActivatedRoute);
+  ts = inject(TranslationService);
   activeTab = signal<number>(0);
 
   constructor() {
@@ -24,7 +26,16 @@ export class Conocenos {
     });
   }
 
-  tabs = ['Quiénes Somos', 'Cómo Participar', 'Historia', 'Himno'];
+  t(key: string): string {
+    return this.ts.t(key);
+  }
+
+  tabs = [
+    'conocenos.quienes_somos',
+    'conocenos.participar',
+    'conocenos.historia',
+    'conocenos.himno',
+  ];
 
   historyChapters = [
     'Índice',

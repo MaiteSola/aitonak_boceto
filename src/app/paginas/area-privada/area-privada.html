@@ -90,7 +90,7 @@
         </h3>
         <nav class="space-y-2">
           @for (item of menuItems; track $index) {
-            @if (!item.isProtected || isAuthed()) {
+            @if (!item.isProtected || isAuthed() || item.title === 'BILLETES BUS') {
               <button
                 (click)="selectSection($index)"
                 class="w-full text-left px-4 py-3 rounded-xl font-bold transition-all flex items-center justify-between group"
@@ -194,6 +194,10 @@
               <app-estatutos></app-estatutos>
             } @else if (activeSection() === 1) {
               <app-rri></app-rri>
+            } @else if (activeSection() === 2) {
+              <app-normas></app-normas>
+            } @else if (activeSection() === 3) {
+              <app-concurso></app-concurso>
             } @else {
               <!-- Contenedor genérico de contenido -->
               <div class="flex flex-col items-center justify-center py-20 text-center">

@@ -5,6 +5,7 @@ import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
 
 import { HttpClient } from '@angular/common/http';
+import { TranslationService } from '../../services/translation.service';
 
 @Component({
   selector: 'app-actividades',
@@ -16,15 +17,20 @@ import { HttpClient } from '@angular/common/http';
 export class Actividades implements OnInit {
   route = inject(ActivatedRoute);
   http = inject(HttpClient);
+  ts = inject(TranslationService);
 
   menuItems = [
-    'Rutas de la Semana',
-    'Estadísticas 2025',
-    'Itinerarios Histórico-Artísticos.',
-    'Otras actividades',
-    'Blog, vídeos y fotos',
-    'Federarse',
+    'actividades.rutas_semana',
+    'actividades.estadisticas',
+    'actividades.itinerarios',
+    'actividades.otras',
+    'actividades.blog',
+    'actividades.federarse',
   ];
+
+  t(key: string): string {
+    return this.ts.t(key);
+  }
 
   activeSection = signal<number>(0);
 
