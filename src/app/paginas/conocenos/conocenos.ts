@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
 import { TranslationService } from '../../services/translation.service';
+import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 
 @Component({
   selector: 'app-conocenos',
-  imports: [Navbar, Footer],
+  imports: [Navbar, Footer, HeroCarousel],
   templateUrl: './conocenos.html',
   styleUrl: './conocenos.scss',
 })
@@ -14,6 +15,7 @@ export class Conocenos {
   route = inject(ActivatedRoute);
   ts = inject(TranslationService);
   activeTab = signal<number>(0);
+  isMobileMenuOpen = signal<boolean>(false);
 
   constructor() {
     this.route.queryParams.subscribe((params) => {

@@ -60,6 +60,7 @@
         <div class="relative group">
           <a
             routerLink="/conocenos"
+            (click)="goToConocenos($event)"
             class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 html-nav hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
           >
             <svg
@@ -178,6 +179,7 @@
         <div class="relative group">
           <a
             routerLink="/actividades"
+            (click)="goToActividades($event)"
             class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 html-nav hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
           >
             <svg
@@ -481,7 +483,7 @@
           <a
             routerLink="/conocenos"
             class="flex items-center gap-3 text-slate-700 hover:text-lime-600 hover:bg-slate-50 font-semibold px-4 py-3 rounded-xl text-base transition duration-150 flex-1"
-            (click)="mobileMenuOpen.set(false)"
+            (click)="goToConocenos($event); mobileMenuOpen.set(false)"
           >
             <svg
               class="w-5 h-5 text-slate-400"
@@ -612,7 +614,7 @@
           <a
             routerLink="/actividades"
             class="flex items-center gap-3 text-slate-700 hover:text-lime-600 hover:bg-slate-50 font-semibold px-4 py-3 rounded-xl text-base transition duration-150 flex-1"
-            (click)="mobileMenuOpen.set(false)"
+            (click)="goToActividades($event); mobileMenuOpen.set(false)"
           >
             <svg
               class="w-5 h-5 text-slate-400"

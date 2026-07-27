@@ -10,6 +10,7 @@ import { Rri } from './rri/rri';
 import { Normas } from './normas/normas';
 import { Concurso } from './concurso/concurso';
 import { TranslationService } from '../../services/translation.service';
+import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 
 export interface AreaItem {
   title: string;
@@ -19,7 +20,7 @@ export interface AreaItem {
 @Component({
   selector: 'app-area-privada',
   standalone: true,
-  imports: [CommonModule, Navbar, Footer, Login, Estatutos, Rri, Normas, Concurso],
+  imports: [CommonModule, Navbar, Footer, Login, Estatutos, Rri, Normas, Concurso, HeroCarousel],
   templateUrl: './area-privada.html',
   styleUrl: './area-privada.scss',
 })

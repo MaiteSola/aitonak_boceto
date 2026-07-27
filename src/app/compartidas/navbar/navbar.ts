@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { TranslationService } from '../../services/translation.service';
 import { AuthService } from '../../services/auth.service';
 
@@ -10,6 +10,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrl: './navbar.scss',
 })
 export class Navbar {
+  router = inject(Router);
   ts = inject(TranslationService);
   authService = inject(AuthService);
   lang = this.ts.lang;
@@ -27,6 +28,24 @@ export class Navbar {
 
   setLang(l: 'es' | 'eu') {
     this.ts.setLang(l);
+  }
+
+  goToConocenos(e: Event) {
+    if (this.router.url.split('?')[0] === '/conocenos') {
+      // Force reload by navigating to dummy route and back, preserving SPA feeling
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/conocenos']);
+      });
+    }
+  }
+
+  goToActividades(e: Event) {
+    if (this.router.url.split('?')[0] === '/actividades') {
+      // Force reload by navigating to dummy route and back, preserving SPA feeling
+      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+        this.router.navigate(['/actividades']);
+      });
+    }
   }
 
   toggleMobileMenu() {

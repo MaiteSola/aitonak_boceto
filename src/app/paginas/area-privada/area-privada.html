@@ -1,46 +1,12 @@
 <app-navbar></app-navbar>
 
 <!-- Hero Section para Área Privada -->
-<div class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden bg-slate-900">
-  <div class="absolute inset-0">
-    <div
-      class="absolute inset-0 bg-gradient-to-r from-slate-900 via-slate-800 to-transparent z-10"
-    ></div>
-    <!-- Decoración de fondo de héroe -->
-    <div
-      class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 rounded-full bg-lime-500/20 blur-3xl"
-    ></div>
-    <div class="absolute bottom-0 right-1/4 w-64 h-64 rounded-full bg-sky-500/20 blur-3xl"></div>
-  </div>
-
-  <div class="container mx-auto px-4 relative z-20">
-    <div class="max-w-2xl">
-      <div
-        class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-lime-500/20 text-lime-400 text-sm font-bold tracking-widest uppercase mb-6 border border-lime-500/30"
-      >
-        <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8V7a4 4 0 00-8 0v4h8z"
-          />
-        </svg>
-        Entorno de Socios
-      </div>
-      <h1 class="text-4xl md:text-5xl lg:text-6xl font-black text-white leading-tight mb-6">
-        Área
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-lime-400 to-sky-400"
-          >Privada</span
-        >
-      </h1>
-      <p class="text-lg text-slate-300 leading-relaxed">
-        Accede a documentos internos, actas, reglamentos y toda la información reservada para los
-        socios y participantes de la Asociación Club de Montaña Aitonak.
-      </p>
-    </div>
-  </div>
-</div>
+<app-hero-carousel
+  title="Área Privada"
+  subtitle="Accede a documentos internos, actas, reglamentos y toda la información reservada para los socios y participantes de la Asociación Club de Montaña Aitonak."
+  [alignCenter]="false"
+  customHeightClass="h-[200px] sm:h-[250px] md:h-[300px]"
+></app-hero-carousel>
 
 <main class="py-12 bg-slate-50 min-h-screen">
   <div class="container mx-auto px-4">

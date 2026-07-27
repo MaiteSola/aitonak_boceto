@@ -1,0 +1,100 @@
+<section class="relative group bg-slate-900 animate-fadeIn">
+  <div class="relative w-full overflow-hidden" [class]="customHeightClass()">
+    @for (slide of slides; track $index) {
+      <div
+        class="absolute inset-0 transition-all duration-1000 ease-in-out transform"
+        [style.opacity]="activeSlide() === $index ? '1' : '0'"
+        [style.z-index]="activeSlide() === $index ? '10' : '0'"
+        [style.visibility]="activeSlide() === $index ? 'visible' : 'hidden'"
+        [class.scale-100]="activeSlide() === $index"
+        [class.scale-105]="activeSlide() !== $index"
+      >
+        <!-- Background image and overlay -->
+        <img
+          [src]="slide"
+          alt="Fondo interactivo"
+          class="w-full h-full object-cover select-none brightness-50 transition-all duration-1000"
+        />
+        <!-- Subtle Dark Gradient for contrast -->
+        <div class="absolute inset-0 bg-slate-900/20"></div>
+      </div>
+    }
+
+    <!-- TÍTULO ESTÁTICO CENTRAL -->
+    <div
+      class="absolute inset-0 z-20 flex flex-col items-center justify-center pointer-events-none px-4"
+    >
+      <div
+        class="flex flex-col w-full"
+        [class.items-center]="alignCenter()"
+        [class.text-center]="alignCenter()"
+        [class.items-start]="!alignCenter()"
+        [class.text-left]="!alignCenter()"
+        [class.max-w-7xl]="!alignCenter()"
+        [class.mx-auto]="!alignCenter()"
+      >
+        <h1
+          class="font-black text-white uppercase drop-shadow-md select-none"
+          [class.text-4xl]="alignCenter()"
+          [class.sm:text-5xl]="alignCenter()"
+          [class.md:text-6xl]="alignCenter()"
+          [class.lg:text-7xl]="alignCenter()"
+          [class.tracking-widest]="alignCenter()"
+          [class.mb-2]="alignCenter()"
+          [class.sm:mb-4]="alignCenter()"
+          [class.text-3xl]="!alignCenter()"
+          [class.sm:text-5xl]="!alignCenter()"
+          [class.tracking-wide]="!alignCenter()"
+        >
+          {{ title() }}
+        </h1>
+        @if (subtitle()) {
+          <p
+            class="font-semibold drop-shadow-md select-none"
+            [class.text-lg]="alignCenter()"
+            [class.sm:text-2xl]="alignCenter()"
+            [class.md:text-3xl]="alignCenter()"
+            [class.text-slate-100/95]="alignCenter()"
+            [class.max-w-4xl]="alignCenter()"
+            [class.mt-4]="!alignCenter()"
+            [class.text-base]="!alignCenter()"
+            [class.sm:text-lg]="!alignCenter()"
+            [class.text-lime-400]="!alignCenter()"
+            [class.max-w-2xl]="!alignCenter()"
+          >
+            {{ subtitle() }}
+          </p>
+        }
+        @if (subtitleItalic()) {
+          <p
+            class="text-xs sm:text-base md:text-lg text-slate-300 font-medium italic drop-shadow max-w-2xl select-none mt-1 font-sans"
+          >
+            {{ subtitleItalic() }}
+          </p>
+        }
+        <ng-content></ng-content>
+      </div>
+    </div>
+
+    <!-- Next & Previous Translucent Navigation Buttons -->
+    <button
+      (click)="prevSlide()"
+      class="hidden md:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
+      aria-label="Previous Slide"
+    >
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+      </svg>
+    </button>
+
+    <button
+      (click)="nextSlide()"
+      class="hidden md:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
+      aria-label="Next Slide"
+    >
+      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
+  </div>
+</section>

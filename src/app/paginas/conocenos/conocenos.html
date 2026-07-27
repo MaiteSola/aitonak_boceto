@@ -1,34 +1,66 @@
 <app-navbar></app-navbar>
 
-<!-- Hero / Header -->
-<div class="relative bg-slate-800 py-16 overflow-hidden">
-  <div class="absolute inset-0 z-0">
-    <img
-      src="assets/imagenes/portada_5.jpg"
-      alt="Montaña conocenos"
-      class="w-full h-full object-cover opacity-30"
-    />
-    <div class="absolute inset-0 bg-gradient-to-t from-slate-900 to-transparent"></div>
-  </div>
-  <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center sm:text-left">
-    <h1 class="text-3xl sm:text-5xl font-black text-white tracking-wide uppercase">
-      {{ t('conocenos.title') }}
-    </h1>
-    <p class="mt-4 text-base sm:text-lg text-lime-400 font-semibold max-w-2xl">
-      {{ t('conocenos.subtitle') }}
-    </p>
-  </div>
-</div>
+<!-- Hero / Header Carousel -->
+<app-hero-carousel
+  [title]="t('conocenos.title')"
+  [subtitle]="t('conocenos.subtitle')"
+  [alignCenter]="false"
+  customHeightClass="h-[200px] sm:h-[220px] md:h-[250px]"
+></app-hero-carousel>
 
-<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
+<main id="menu" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 lg:py-16">
   <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
     <!-- Sidebar -->
     <aside class="w-full lg:w-1/4 shrink-0">
-      <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sticky top-28">
+      <!-- Botón móvil (Hamburger/Dropdown) -->
+      <div class="lg:hidden mb-4">
+        <button
+          (click)="isMobileMenuOpen.set(!isMobileMenuOpen())"
+          class="w-full flex items-center justify-between bg-white rounded-2xl shadow-sm border border-slate-100 p-4 font-bold text-slate-700 hover:bg-slate-50 transition-colors"
+        >
+          <div class="flex items-center gap-2">
+            <svg
+              class="w-6 h-6 text-lime-600"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M4 6h16M4 12h16M4 18h16"
+              />
+            </svg>
+            <span class="text-lg">Menú Conócenos</span>
+          </div>
+          <svg
+            class="w-5 h-5 text-slate-500 transition-transform duration-300"
+            [class.rotate-180]="isMobileMenuOpen()"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M19 9l-7 7-7-7"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Menú -->
+      <div
+        class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 sticky top-28 transition-all duration-300 overflow-hidden lg:!block"
+        [class.hidden]="!isMobileMenuOpen()"
+        [class.block]="isMobileMenuOpen()"
+      >
         <nav class="flex flex-col gap-1.5">
           @for (tab of tabs; track $index) {
             <button
-              (click)="goToTab($index)"
+              (click)="goToTab($index); isMobileMenuOpen.set(false)"
               class="w-full text-left px-4 py-3 rounded-xl font-medium transition-all duration-200"
               [class]="
                 activeTab() === $index

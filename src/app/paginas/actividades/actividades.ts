@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
+import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 
 import { HttpClient } from '@angular/common/http';
 import { TranslationService } from '../../services/translation.service';
@@ -10,7 +11,7 @@ import { TranslationService } from '../../services/translation.service';
 @Component({
   selector: 'app-actividades',
   standalone: true,
-  imports: [CommonModule, Navbar, Footer],
+  imports: [CommonModule, Navbar, Footer, HeroCarousel],
   templateUrl: './actividades.html',
   styleUrl: './actividades.scss',
 })
@@ -33,6 +34,7 @@ export class Actividades implements OnInit {
   }
 
   activeSection = signal<number>(0);
+  isMobileMenuOpen = signal<boolean>(false);
 
   // --- Blog / WP API ---
   blogPosts = signal<any[]>([]);
