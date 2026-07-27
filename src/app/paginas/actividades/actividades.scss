@@ -1,0 +1,28 @@
+// actividades.scss
+
+
+// --- ESTILOS DINÁMICOS EXTRAÍDOS DEL HTML ---
+
+.pie-chart-circle {
+  background: var(--pie-gradient);
+}
+
+.stat-column {
+  min-height: 20px;
+  height: var(--col-height);
+}
+
+.stat-segment {
+  height: var(--segment-height);
+}
+
+.age-bar-1 { height: 5%; }
+.age-bar-2 { height: 15%; }
+.age-bar-3 { height: 45%; }
+.age-bar-4 { height: 70%; }
+.age-bar-5 { height: 90%; }
+.age-bar-6 { height: 100%; }
+.age-bar-7 { height: 65%; }
+.age-bar-8 { height: 40%; }
+.age-bar-9 { height: 10%; }
+.age-bar-10 { height: 3%; }

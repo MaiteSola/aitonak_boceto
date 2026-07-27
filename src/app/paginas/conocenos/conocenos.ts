@@ -1,4 +1,5 @@
-import { Component, signal } from '@angular/core';
+import { Component, effect, inject, signal } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
 
@@ -9,9 +10,21 @@ import { Footer } from '../../compartidas/footer/footer';
   styleUrl: './conocenos.scss',
 })
 export class Conocenos {
+  route = inject(ActivatedRoute);
   activeTab = signal<number>(0);
 
-  tabs = ['Cómo Participar', 'Historia', 'Himno', 'Contacto'];
+  constructor() {
+    this.route.queryParams.subscribe((params) => {
+      const tb = params['tab'];
+      if (tb !== undefined) {
+        this.goToTab(parseInt(tb, 10));
+      } else {
+        this.goToTab(0);
+      }
+    });
+  }
+
+  tabs = ['Quiénes Somos', 'Cómo Participar', 'Historia', 'Himno'];
 
   historyChapters = [
     'Índice',
@@ -30,29 +43,16 @@ export class Conocenos {
     '12. 25 años para el recuerdo.',
   ];
 
-  private touchStartX = 0;
-
   goToTab(index: number) {
-    const clamped = Math.max(0, Math.min(this.tabs.length - 1, index));
-    this.activeTab.set(clamped);
+    this.activeTab.set(index);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  nextTab() {
-    this.goToTab(this.activeTab() + 1);
-  }
-
-  prevTab() {
-    this.goToTab(this.activeTab() - 1);
-  }
-
-  onTouchStart(event: TouchEvent) {
-    this.touchStartX = event.changedTouches[0].screenX;
-  }
-
-  onTouchEnd(event: TouchEvent) {
-    const delta = this.touchStartX - event.changedTouches[0].screenX;
-    if (Math.abs(delta) > 50) {
-      delta > 0 ? this.nextTab() : this.prevTab();
+  toggleAudio(audio: HTMLAudioElement) {
+    if (audio.paused) {
+      audio.play();
+    } else {
+      audio.pause();
     }
   }
 }
