@@ -23,6 +23,7 @@ export class Actividades implements OnInit {
   menuItems = [
     'actividades.rutas_semana',
     'actividades.estadisticas',
+    'actividades.calendario',
     'actividades.itinerarios',
     'actividades.otras',
     'actividades.blog',

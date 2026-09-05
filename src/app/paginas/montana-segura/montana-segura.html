@@ -1,0 +1,100 @@
+<app-navbar></app-navbar>
+
+<app-hero-carousel
+  title="Seguridad en la Montaña"
+  subtitle="Nuestras recomendaciones y actuaciones para garantizar una experiencia segura en la naturaleza."
+  [alignCenter]="false"
+  customHeightClass="h-[200px] sm:h-[250px] md:h-[300px]"
+></app-hero-carousel>
+
+<main class="py-16 bg-slate-50 min-h-screen">
+  <div class="container mx-auto px-4 max-w-4xl">
+    <div
+      class="bg-white rounded-3xl p-8 md:p-12 shadow-sm border border-slate-100 mb-8 animate-in slide-in-from-bottom-2 fade-in duration-700"
+    >
+      <h2 class="text-3xl font-black text-slate-800 mb-8 pb-4 border-b-2 border-slate-100">
+        Recomendaciones y Prevención
+      </h2>
+
+      <div class="prose prose-slate prose-lg md:prose-xl max-w-none space-y-6 text-justify">
+        <p class="lead text-slate-800 font-semibold text-xl mb-6">
+          El senderismo constituye una actividad accesible para una gran parte de la población. Las
+          rutas montañeras no son asequibles para todo el mundo.
+        </p>
+
+        <p class="text-slate-600">
+          Ambas actividades aportan importantes beneficios físicos, psicológicos y sociales. Sin
+          embargo, las actividades desarrolladas en el medio natural presentan riesgos específicos
+          que requieren medidas preventivas adecuadas.
+        </p>
+
+        <p class="text-slate-600">
+          En <strong>Aitona-Amonak</strong> participan personas con diferentes capacidades físicas y
+          niveles de experiencia. Por ello, resulta conveniente promover recomendaciones y
+          actuaciones orientadas a aumentar la seguridad de todas las personas participantes durante
+          las actividades en montaña.
+        </p>
+
+        <div class="bg-sky-50/50 border-l-4 border-sky-500 p-6 rounded-r-2xl my-8">
+          <p class="text-slate-700 italic m-0">
+            La Asociación Club de Montaña Aitona-Amonak establece en sus Estatutos una serie de
+            fines y actividades relacionadas con la promoción de la actividad física y el disfrute
+            del entorno natural. Para desarrollar estas actividades con las mayores garantías de
+            seguridad, es necesario considerar tanto las características del medio en el que se
+            desarrollan como las condiciones personales de quienes participan.
+          </p>
+        </div>
+      </div>
+
+      <!-- Sección de Link en Pruebas -->
+      <div
+        class="mt-12 p-6 md:p-8 bg-slate-900 rounded-2xl flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xl shadow-slate-900/10"
+      >
+        <div class="flex items-center gap-4">
+          <div class="bg-rose-500/20 text-rose-400 p-3 rounded-xl">
+            <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
+              />
+            </svg>
+          </div>
+          <div>
+            <a
+              routerLink="/montana-segura/proyecto"
+              class="text-lime-400 hover:text-lime-300 font-bold text-lg md:text-xl underline underline-offset-4 decoration-2 decoration-lime-500/30 hover:decoration-lime-400 transition-colors inline-block mb-1"
+            >
+              Acceso al proyecto completo
+            </a>
+            <p class="text-slate-400 text-sm font-semibold tracking-widest">
+              E N &nbsp; P R U E B A S &nbsp; ! ! !
+            </p>
+          </div>
+        </div>
+
+        <a
+          routerLink="/montana-segura/proyecto"
+          class="group shrink-0 inline-flex items-center justify-center bg-white/10 hover:bg-white/20 text-white font-bold w-12 h-12 rounded-xl transition-all duration-300 backdrop-blur-sm"
+        >
+          <svg
+            class="w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M9 5l7 7-7 7"
+            />
+          </svg>
+        </a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<app-footer></app-footer>

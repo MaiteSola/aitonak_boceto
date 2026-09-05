@@ -1,4 +1,5 @@
 import { Component, signal, inject } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { TranslationService } from '../../services/translation.service';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
@@ -6,7 +7,7 @@ import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 
 @Component({
   selector: 'app-home',
-  imports: [Navbar, Footer, HeroCarousel],
+  imports: [Navbar, Footer, HeroCarousel, RouterLink],
   templateUrl: './home.html',
   styleUrl: './home.scss',
 })

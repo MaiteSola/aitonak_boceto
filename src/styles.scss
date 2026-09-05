@@ -1,1 +1,19 @@
 @import 'tailwindcss';
+
+@layer base {
+  main p {
+    text-align: justify;
+  }
+  
+  main ul:not([class*="flex"]) > li {
+    text-align: justify;
+  }
+  
+  main ol:not([class*="flex"]) > li {
+    text-align: justify;
+  }
+
+  .prose {
+    text-align: justify;
+  }
+}

@@ -41,10 +41,10 @@ export class AreaPrivada implements OnInit {
   isAuthed = this.authService.isLoggedIn;
 
   menuItems: AreaItem[] = [
-    { title: 'Estatutos', isProtected: false },
-    { title: 'R.R.I.', isProtected: false },
-    { title: 'Rutas Normas del Grupo', isProtected: false },
-    { title: 'Reglas Concurso Fotográfico', isProtected: false },
+    { title: 'Estatutos', isProtected: true },
+    { title: 'R.R.I.', isProtected: true },
+    { title: 'Rutas Normas del Grupo', isProtected: true },
+    { title: 'Reglas Concurso Fotográfico', isProtected: true },
     { title: 'Pólizas de Seguro', isProtected: true },
     { title: 'Junta Directiva Actual', isProtected: true },
     { title: 'Actas Junta Directiva', isProtected: true },
@@ -53,7 +53,6 @@ export class AreaPrivada implements OnInit {
     { title: 'Historia de ACTAS', isProtected: true },
     { title: 'ENCUESTAS 2019', isProtected: true },
     { title: 'Archivo fotográfico 2026', isProtected: true },
-    { title: 'BILLETES BUS', isProtected: true },
   ];
 
   ngOnInit() {
