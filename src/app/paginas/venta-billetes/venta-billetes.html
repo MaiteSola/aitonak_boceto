@@ -1,0 +1,122 @@
+<app-navbar></app-navbar>
+
+<app-hero-carousel
+  title="Venta de Billetes"
+  subtitle="Reserva de billetes para la próxima salida de autobús."
+  [alignCenter]="true"
+  customHeightClass="h-[200px] sm:h-[250px] md:h-[300px]"
+></app-hero-carousel>
+
+<main class="py-12 bg-slate-50 min-h-screen">
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    @if (!isAuthed() || isLoginView()) {
+      <div class="animate-in fade-in zoom-in-95 duration-500 max-w-lg mx-auto">
+        <app-login (loginSuccess)="onLoginSuccess($event)"></app-login>
+      </div>
+    } @else {
+      <div
+        class="bg-white rounded-3xl p-8 lg:p-12 shadow-sm border border-slate-100 animate-in fade-in slide-in-from-bottom-2 duration-500"
+      >
+        <h2 class="text-3xl font-black text-slate-800 mb-8 text-center uppercase tracking-tight">
+          VENTA BILLETES ONLINE
+        </h2>
+
+        <div class="flex justify-center mb-12">
+          <img
+            src="assets/imagenes/area%20privada/Comprobacion_billetes.png"
+            alt="Asignación y Comprobación de billetes"
+            class="max-w-full h-auto object-contain rounded-xl shadow-md border border-slate-100"
+          />
+        </div>
+
+        <h3 class="text-2xl font-bold text-slate-800 mb-6 text-center uppercase tracking-wide">
+          OPERATIVA
+        </h3>
+
+        <div
+          class="prose prose-slate max-w-none prose-p:text-slate-600 prose-p:leading-relaxed prose-strong:text-slate-800 text-justify"
+        >
+          <p class="mb-6 text-lg">
+            Desde aquí, podrás comprar los billetes de autobús, para la próxima salida.
+          </p>
+
+          <ul class="list-disc pl-5 space-y-4 marker:text-lime-500">
+            <li>
+              Ten en cuenta que este proceso crea una <strong>RESERVA</strong> que se formaliza,
+              previamente a la venta presencial de los lunes.
+            </li>
+            <li>
+              El proceso estará activo desde las <strong>16:00 h. del miércoles</strong> hasta las
+              <strong>24:00 h. del DOMINGO</strong>.
+            </li>
+            <li>
+              Podrás adquirir hasta <strong>4 billetes</strong> y el importe total de la compra, te
+              será cargado por banco una vez al mes, en la cuenta bancaria donde atiendes la cuota
+              anual.
+            </li>
+            <li>
+              El Lunes recibirás en tu email los números de asientos que te hayan correspondido con
+              los mismos criterios de adjudicación que en la venta manual.
+            </li>
+            <li>
+              Si tienes algún problema en la tramitación, dirígete al mail
+              <a
+                href="mailto:aitonak.billetes@gmail.com"
+                class="text-lime-600 font-semibold hover:underline"
+                >aitonak.billetes@gmail.com</a
+              >.
+            </li>
+            <li>
+              Igualmente, si tras realizar la reserva deseas <strong>ANULARLA</strong>, deberás
+              dirigirte por mail, <strong>ANTES DE LAS 9:00 H. DEL LUNES</strong>, (¡más tarde no
+              será válido!), igualmente al mail:
+              <a
+                href="mailto:aitonak.billetes@gmail.com"
+                class="text-lime-600 font-semibold hover:underline"
+                >aitonak.billetes@gmail.com</a
+              >.
+            </li>
+          </ul>
+
+          <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-lime-500 my-8">
+            <p class="m-0 text-sm">
+              Las <strong>PERSONAS NO SOCIAS</strong>, para poder solicitar billetes online, deberán
+              haber aportado previamente el número de cuenta bancaria, y estar aseguradas. La
+              asignación de sus billetes, como en la venta presencial, se hará con los sobrantes de
+              la venta a los socios y socias.
+            </p>
+          </div>
+        </div>
+
+        <div class="mt-16 flex flex-col items-center">
+          <a
+            href="#"
+            class="text-xl md:text-2xl font-medium text-blue-600 hover:text-blue-800 underline transition-colors duration-300 text-center mb-6"
+          >
+            Pincha aquí o en la imagen del billete para iniciar el proceso
+          </a>
+
+          <div class="animate-bounce mb-6 text-red-600 text-6xl font-black">
+            <!-- Downward pointing arrow SVG replacing the image -->
+            <svg class="w-20 h-20" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M12 21l-9-9h5v-10h8v10h5l-9 9z" />
+            </svg>
+          </div>
+
+          <a
+            href="#"
+            class="block w-full max-w-4xl hover:scale-[1.01] transition-transform duration-300 shadow-xl rounded-xl overflow-hidden border-2 border-transparent hover:border-lime-500"
+          >
+            <img
+              src="assets/imagenes/area%20privada/form_reserva_billetes.png"
+              alt="Formulario de reserva de billetes"
+              class="w-full h-auto object-cover"
+            />
+          </a>
+        </div>
+      </div>
+    }
+  </div>
+</main>
+
+<app-footer></app-footer>
