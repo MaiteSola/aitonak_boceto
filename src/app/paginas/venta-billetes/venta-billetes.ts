@@ -11,7 +11,7 @@ import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 @Component({
   selector: 'app-venta-billetes',
   standalone: true,
-  imports: [CommonModule, RouterLink, Navbar, Footer, Login, HeroCarousel],
+  imports: [CommonModule, Navbar, Footer, Login, HeroCarousel],
   templateUrl: './venta-billetes.html',
 })
 export class VentaBilletes {
