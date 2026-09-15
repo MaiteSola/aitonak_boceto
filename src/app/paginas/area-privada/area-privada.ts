@@ -57,15 +57,33 @@ export class AreaPrivada implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
+      let shouldScroll = false;
       if (params['section']) {
         const sectionId = parseInt(params['section'], 10);
         if (!isNaN(sectionId) && sectionId >= 0 && sectionId < this.menuItems.length) {
           this.activeSection.set(sectionId);
+          shouldScroll = true;
           if (this.menuItems[sectionId].isProtected && !this.isAuthed()) {
             // Esto asegura que se marca explícitamente para ver login
             this.isLoginView.set(true);
           }
         }
+      }
+      if (params['scroll'] === 'menu') {
+        shouldScroll = true;
+      }
+
+      if (shouldScroll) {
+        setTimeout(() => {
+          const menuEl = document.getElementById('menu');
+          if (menuEl) {
+            const navHeight = 84;
+            const y = menuEl.getBoundingClientRect().top + window.scrollY - navHeight;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 50);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
   }

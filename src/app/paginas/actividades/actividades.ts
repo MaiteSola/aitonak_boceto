@@ -1,6 +1,6 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
 import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
@@ -17,6 +17,7 @@ import { TranslationService } from '../../services/translation.service';
 })
 export class Actividades implements OnInit {
   route = inject(ActivatedRoute);
+  router = inject(Router);
   http = inject(HttpClient);
   ts = inject(TranslationService);
 
@@ -44,12 +45,26 @@ export class Actividades implements OnInit {
 
   ngOnInit() {
     this.route.queryParams.subscribe((params) => {
-      const sectionIndex = params['section'] ? parseInt(params['section'], 10) : 0;
-      if (!isNaN(sectionIndex) && sectionIndex >= 0 && sectionIndex < this.menuItems.length) {
-        this.activeSection.set(sectionIndex);
+      const sect = params['section'];
+      if (sect !== undefined) {
+        const sectionIndex = parseInt(sect, 10);
+        if (!isNaN(sectionIndex) && sectionIndex >= 0 && sectionIndex < this.menuItems.length) {
+          this.activeSection.set(sectionIndex);
+        }
+        // Esperamos un instante a renderizar y bajamos al contenedor
+        setTimeout(() => {
+          const menuEl = document.getElementById('menu');
+          if (menuEl) {
+            const navHeight = 84;
+            const y = menuEl.getBoundingClientRect().top + window.scrollY - navHeight;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 50);
+      } else {
+        // Carga inicial sin sección específica -> Vemos el Hero
+        this.activeSection.set(0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
-      // scroll to top smoothly
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
     this.fetchBlogPosts();
@@ -99,7 +114,11 @@ export class Actividades implements OnInit {
   }
 
   setSection(index: number) {
-    this.activeSection.set(index);
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { section: index },
+      queryParamsHandling: 'merge',
+    });
   }
 
   // --- Modal Estafeta ---

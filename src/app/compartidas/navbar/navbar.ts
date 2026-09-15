@@ -21,6 +21,8 @@ export class Navbar {
   mobileMenuOpen = signal<boolean>(false);
   conocenosSubmenuOpen = signal<boolean>(false);
   actividadesSubmenuOpen = signal<boolean>(false);
+  montanaSeguraSubmenuOpen = signal<boolean>(false);
+  perfilSubmenuOpen = signal<boolean>(false);
 
   t(key: string): string {
     return this.ts.t(key);
@@ -30,22 +32,39 @@ export class Navbar {
     this.ts.setLang(l);
   }
 
-  goToConocenos(e: Event) {
-    if (this.router.url.split('?')[0] === '/conocenos') {
-      // Force reload by navigating to dummy route and back, preserving SPA feeling
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/conocenos']);
-      });
-    }
+  closeAllSubmenus() {
+    this.conocenosSubmenuOpen.set(false);
+    this.actividadesSubmenuOpen.set(false);
+    this.montanaSeguraSubmenuOpen.set(false);
+    this.perfilSubmenuOpen.set(false);
   }
 
-  goToActividades(e: Event) {
-    if (this.router.url.split('?')[0] === '/actividades') {
-      // Force reload by navigating to dummy route and back, preserving SPA feeling
-      this.router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
-        this.router.navigate(['/actividades']);
-      });
-    }
+  toggleDesktopConocenos(e: Event) {
+    e.stopPropagation();
+    const current = this.conocenosSubmenuOpen();
+    this.closeAllSubmenus();
+    this.conocenosSubmenuOpen.set(!current);
+  }
+
+  toggleDesktopActividades(e: Event) {
+    e.stopPropagation();
+    const current = this.actividadesSubmenuOpen();
+    this.closeAllSubmenus();
+    this.actividadesSubmenuOpen.set(!current);
+  }
+
+  toggleDesktopMontana(e: Event) {
+    e.stopPropagation();
+    const current = this.montanaSeguraSubmenuOpen();
+    this.closeAllSubmenus();
+    this.montanaSeguraSubmenuOpen.set(!current);
+  }
+
+  toggleDesktopPerfil(e: Event) {
+    e.stopPropagation();
+    const current = this.perfilSubmenuOpen();
+    this.closeAllSubmenus();
+    this.perfilSubmenuOpen.set(!current);
   }
 
   toggleMobileMenu() {
@@ -53,13 +72,11 @@ export class Navbar {
   }
 
   toggleConocenosSubmenu(e: Event) {
-    e.preventDefault();
     e.stopPropagation();
     this.conocenosSubmenuOpen.update((prev) => !prev);
   }
 
   toggleActividadesSubmenu(e: Event) {
-    e.preventDefault();
     e.stopPropagation();
     this.actividadesSubmenuOpen.update((prev) => !prev);
   }
@@ -67,5 +84,6 @@ export class Navbar {
   logout(e: Event) {
     e.preventDefault();
     this.authService.logout();
+    this.closeAllSubmenus();
   }
 }

@@ -2,9 +2,18 @@
 <header
   class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-200/60 shadow-sm transition-all duration-300"
 >
+  @if (
+    conocenosSubmenuOpen() ||
+    actividadesSubmenuOpen() ||
+    montanaSeguraSubmenuOpen() ||
+    perfilSubmenuOpen()
+  ) {
+    <div class="fixed inset-0 z-0" (click)="closeAllSubmenus()"></div>
+  }
+
   <!-- Linea de Acento con Gradiente Premium -->
   <div
-    class="h-1 bg-gradient-to-r from-lime-400 via-lime-500 to-emerald-500 w-full animate-pulse"
+    class="h-1 bg-gradient-to-r from-lime-400 via-lime-500 to-emerald-500 w-full animate-pulse relative z-10"
   ></div>
 
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -58,11 +67,12 @@
           {{ t('nav.bienvenida') }}
         </a>
         <div class="relative group">
-          <a
-            routerLink="/conocenos"
-            routerLinkActive="!text-lime-700 !font-bold !bg-slate-50"
-            (click)="goToConocenos($event)"
-            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 html-nav hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
+          <a routerLink="/conocenos"
+            (click)="toggleDesktopConocenos($event)"
+            [class.!text-lime-700]="conocenosSubmenuOpen()"
+            [class.!font-bold]="conocenosSubmenuOpen()"
+            [class.!bg-slate-50]="conocenosSubmenuOpen()"
+            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
           >
             <svg
               class="w-4 h-4 text-slate-400 group-hover/link:text-lime-600 transition-colors duration-300"
@@ -80,7 +90,8 @@
             {{ t('nav.conocenos') }}
             <!-- chevron icon for dropdown -->
             <svg
-              class="w-3.5 h-3.5 ml-0.5 opacity-60 group-hover:rotate-180 transition-transform duration-300"
+              class="w-3.5 h-3.5 ml-0.5 opacity-60 transition-transform duration-300"
+              [class.rotate-180]="conocenosSubmenuOpen()"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -91,11 +102,17 @@
           </a>
           <!-- Desktop Dropdown -->
           <div
-            class="absolute left-0 top-full mt-1 w-48 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 p-2 pointer-events-none group-hover:pointer-events-auto"
+            class="absolute left-0 top-full mt-1 w-52 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl transition-all duration-300 z-[99] transform p-2 {{
+              conocenosSubmenuOpen()
+                ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                : 'opacity-0 invisible translate-y-2 pointer-events-none'
+            }}"
           >
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 0 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               <svg
@@ -116,6 +133,8 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 1 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               <svg
@@ -136,6 +155,8 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 2 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               <svg
@@ -156,6 +177,8 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 3 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               <svg
@@ -178,11 +201,12 @@
 
         <!-- Actividades Dropdown -->
         <div class="relative group">
-          <a
-            routerLink="/actividades"
-            routerLinkActive="!text-lime-700 !font-bold !bg-slate-50"
-            (click)="goToActividades($event)"
-            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 html-nav hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
+          <a routerLink="/actividades"
+            (click)="toggleDesktopActividades($event)"
+            [class.!text-lime-700]="actividadesSubmenuOpen()"
+            [class.!font-bold]="actividadesSubmenuOpen()"
+            [class.!bg-slate-50]="actividadesSubmenuOpen()"
+            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
           >
             <svg
               class="w-4 h-4 text-slate-400 group-hover/link:text-lime-600 transition-colors duration-300"
@@ -200,7 +224,8 @@
             {{ t('nav.actividades') }}
             <!-- chevron icon for dropdown -->
             <svg
-              class="w-3.5 h-3.5 ml-0.5 opacity-60 group-hover:rotate-180 transition-transform duration-300"
+              class="w-3.5 h-3.5 ml-0.5 opacity-60 transition-transform duration-300"
+              [class.rotate-180]="actividadesSubmenuOpen()"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -211,47 +236,65 @@
           </a>
           <!-- Desktop Dropdown -->
           <div
-            class="absolute left-0 top-full mt-1 w-64 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 p-2 pointer-events-none group-hover:pointer-events-auto"
+            class="absolute left-0 top-full mt-1 w-64 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl transition-all duration-300 z-[99] transform p-2 {{
+              actividadesSubmenuOpen()
+                ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                : 'opacity-0 invisible translate-y-2 pointer-events-none'
+            }}"
           >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 0 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.rutas_semana') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 1 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.estadisticas') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 2 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.calendario') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 3 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.itinerarios') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 4 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.otras') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 5 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.blog') }}</a
             >
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 6 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.federarse') }}</a
             >
@@ -260,10 +303,12 @@
 
         <!-- Montaña Segura Dropdown -->
         <div class="relative group">
-          <a
-            routerLink="/montana-segura"
-            routerLinkActive="!text-lime-700 !font-bold !bg-slate-50"
-            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 html-nav hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
+          <a routerLink="/montana-segura"
+            (click)="toggleDesktopMontana($event)"
+            [class.!text-lime-700]="montanaSeguraSubmenuOpen()"
+            [class.!font-bold]="montanaSeguraSubmenuOpen()"
+            [class.!bg-slate-50]="montanaSeguraSubmenuOpen()"
+            class="group/link inline-flex items-center gap-1.5 text-slate-600 hover:text-lime-605 hover:bg-lime-50/50 px-3.5 py-2 rounded-xl text-sm font-semibold transition-all duration-350 cursor-pointer"
           >
             <svg
               class="w-4 h-4 text-slate-400 group-hover/link:text-lime-600 transition-colors duration-300"
@@ -280,7 +325,8 @@
             </svg>
             Montaña Segura
             <svg
-              class="w-3.5 h-3.5 ml-0.5 opacity-60 group-hover:rotate-180 transition-transform duration-300"
+              class="w-3.5 h-3.5 ml-0.5 opacity-60 transition-transform duration-300"
+              [class.rotate-180]="montanaSeguraSubmenuOpen()"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -290,19 +336,27 @@
             </svg>
           </a>
           <div
-            class="absolute left-0 top-full mt-1 w-64 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 p-2 pointer-events-none group-hover:pointer-events-auto"
+            class="absolute left-0 top-full mt-1 w-64 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl transition-all duration-300 z-[99] transform p-2 {{
+              montanaSeguraSubmenuOpen()
+                ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                : 'opacity-0 invisible translate-y-2 pointer-events-none'
+            }}"
           >
             <a
               routerLink="/montana-segura"
               [routerLinkActiveOptions]="{ exact: true }"
-              routerLinkActive="bg-lime-50 text-lime-600"
+              [queryParams]="{ scroll: 'menu' }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               Recomendaciones
             </a>
             <a
               routerLink="/montana-segura/proyecto"
-              routerLinkActive="bg-lime-50 text-lime-600"
+              [queryParams]="{ scroll: 'menu' }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+              (click)="closeAllSubmenus()"
               class="flex items-center px-4 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
               Proyecto Completo
@@ -332,6 +386,7 @@
         @if (!isAuthed()) {
           <a
             routerLink="/area-privada"
+              [queryParams]="{ scroll: 'menu' }"
             routerLinkActive="!text-lime-700 !font-bold !border-lime-500 !bg-lime-50/30"
             class="group inline-flex items-center gap-2 border border-slate-200/80 text-slate-700 bg-white hover:text-lime-605 hover:border-lime-500 hover:bg-lime-50/10 px-4 py-2 rounded-xl text-sm font-bold shadow-xs hover:shadow-sm transition-all duration-350"
           >
@@ -353,6 +408,7 @@
         } @else {
           <div class="relative group">
             <button
+              (click)="toggleDesktopPerfil($event)"
               class="group/link inline-flex items-center gap-2 border border-lime-200 text-lime-700 bg-lime-50 hover:bg-lime-100 px-4 py-2 rounded-xl text-sm font-bold shadow-xs hover:shadow-sm transition-all duration-350 cursor-pointer"
             >
               <svg
@@ -370,7 +426,8 @@
               </svg>
               ¡Hola, {{ username() }}!
               <svg
-                class="w-3.5 h-3.5 ml-0.5 opacity-60 group-hover:rotate-180 transition-transform duration-300"
+                class="w-3.5 h-3.5 ml-0.5 opacity-60 transition-transform duration-300"
+                [class.rotate-180]="perfilSubmenuOpen()"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -380,10 +437,17 @@
               </svg>
             </button>
             <div
-              class="absolute left-0 top-full mt-1 w-48 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300 z-50 transform translate-y-2 group-hover:translate-y-0 p-2 pointer-events-none group-hover:pointer-events-auto"
+              class="absolute left-0 top-full mt-1 w-48 bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-xl transition-all duration-300 z-[99] transform p-2 {{
+                perfilSubmenuOpen()
+                  ? 'opacity-100 visible translate-y-0 pointer-events-auto'
+                  : 'opacity-0 invisible translate-y-2 pointer-events-none'
+              }}"
             >
               <a
                 routerLink="/area-privada"
+              [queryParams]="{ scroll: 'menu' }"
+                routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+                (click)="closeAllSubmenus()"
                 class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >
                 <svg
@@ -545,7 +609,7 @@
             routerLink="/conocenos"
             routerLinkActive="!text-lime-700 !bg-slate-100 !font-bold"
             class="flex items-center gap-3 text-slate-700 hover:text-lime-600 hover:bg-slate-50 font-semibold px-4 py-3 rounded-xl text-base transition duration-150 flex-1"
-            (click)="goToConocenos($event); mobileMenuOpen.set(false)"
+            (click)="mobileMenuOpen.set(false)"
           >
             <svg
               class="w-5 h-5 text-slate-400"
@@ -587,6 +651,7 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 0 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
@@ -608,6 +673,7 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 1 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
@@ -629,6 +695,7 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 2 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
@@ -650,6 +717,7 @@
             <a
               routerLink="/conocenos"
               [queryParams]="{ tab: 3 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             >
@@ -677,7 +745,7 @@
             routerLink="/actividades"
             routerLinkActive="!text-lime-700 !bg-slate-100 !font-bold"
             class="flex items-center gap-3 text-slate-700 hover:text-lime-600 hover:bg-slate-50 font-semibold px-4 py-3 rounded-xl text-base transition duration-150 flex-1"
-            (click)="goToActividades($event); mobileMenuOpen.set(false)"
+            (click)="mobileMenuOpen.set(false)"
           >
             <svg
               class="w-5 h-5 text-slate-400"
@@ -719,6 +787,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 0 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.rutas_semana') }}</a
@@ -726,6 +795,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 1 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.estadisticas') }}</a
@@ -733,6 +803,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 2 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.calendario') }}</a
@@ -740,6 +811,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 3 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.itinerarios') }}</a
@@ -747,6 +819,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 4 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.otras') }}</a
@@ -754,6 +827,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 5 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.blog') }}</a
@@ -761,6 +835,7 @@
             <a
               routerLink="/actividades"
               [queryParams]="{ section: 6 }"
+              routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
               (click)="mobileMenuOpen.set(false)"
               class="px-3 py-2 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
               >{{ t('actividades.federarse') }}</a
@@ -794,6 +869,7 @@
       @if (!isAuthed()) {
         <a
           routerLink="/area-privada"
+              [queryParams]="{ scroll: 'menu' }"
           routerLinkActive="!text-lime-700 !bg-slate-100 !font-bold"
           class="flex items-center gap-3 border border-slate-200/80 text-slate-700 bg-slate-50/50 hover:text-lime-600 hover:bg-lime-50/30 font-bold px-4 py-3 rounded-xl text-base transition duration-150"
           (click)="mobileMenuOpen.set(false)"
@@ -834,7 +910,9 @@
 
           <a
             routerLink="/area-privada"
-            class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
+              [queryParams]="{ scroll: 'menu' }"
+                routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+                class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             (click)="mobileMenuOpen.set(false)"
           >
             <svg

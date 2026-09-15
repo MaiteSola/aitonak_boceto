@@ -1,5 +1,5 @@
 import { Component, effect, inject, signal } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Navbar } from '../../compartidas/navbar/navbar';
 import { Footer } from '../../compartidas/footer/footer';
 import { TranslationService } from '../../services/translation.service';
@@ -13,6 +13,7 @@ import { HeroCarousel } from '../../compartidas/hero-carousel/hero-carousel';
 })
 export class Conocenos {
   route = inject(ActivatedRoute);
+  router = inject(Router);
   ts = inject(TranslationService);
   activeTab = signal<number>(0);
   isMobileMenuOpen = signal<boolean>(false);
@@ -21,9 +22,22 @@ export class Conocenos {
     this.route.queryParams.subscribe((params) => {
       const tb = params['tab'];
       if (tb !== undefined) {
-        this.goToTab(parseInt(tb, 10));
+        this.activeTab.set(parseInt(tb, 10));
+        // Esperamos un instante a que se renderice el nuevo contenido del tab
+        setTimeout(() => {
+          const menuEl = document.getElementById('menu');
+          if (menuEl) {
+            // El navbar tiene h-16 sm:h-20 (~80px). Restamos ~84px para que
+            // el contenedor de fondo blanco quede exactamente debajo del navbar (flush).
+            const navHeight = 84;
+            const y = menuEl.getBoundingClientRect().top + window.scrollY - navHeight;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+          }
+        }, 50);
       } else {
-        this.goToTab(0);
+        // Carga inicial genérica: Nos quedamos arriba viendo el Hero
+        this.activeTab.set(0);
+        window.scrollTo({ top: 0, behavior: 'smooth' });
       }
     });
   }
@@ -57,8 +71,13 @@ export class Conocenos {
   ];
 
   goToTab(index: number) {
-    this.activeTab.set(index);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    // En vez de hacer el scroll aquí, actualizamos la URL (queryParam)
+    // Esto sincroniza el estado activo con el Navbar y dispara el scroll automáticamente.
+    this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { tab: index },
+      queryParamsHandling: 'merge',
+    });
   }
 
   toggleAudio(audio: HTMLAudioElement) {

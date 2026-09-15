@@ -1,12 +1,15 @@
 <app-navbar></app-navbar>
 <main class="flex-grow">
   <!-- HERO SECTION: Dynamic Slideshow Carousel con componente compartido -->
-  <app-hero-carousel title="AITONA-AMONAK" [subtitle]="t('hero.bienvenida')">
+  <app-hero-carousel
+    title="AITONA-AMONAK"
+    [subtitle]="t('hero.bienvenida')"
+    customHeightClass="h-[400px] sm:h-[450px] lg:h-[60vh] min-h-[400px]"
+  >
     <!-- Action Button inside ng-content -->
     <div class="mt-6 sm:mt-8 pointer-events-auto">
       <a
         routerLink="/conocenos"
-        fragment="menu"
         class="bg-lime-500 hover:bg-lime-400 text-slate-950 font-black px-8 py-4 rounded-full transition duration-300 text-sm sm:text-base shadow-lg shadow-lime-500/25 hover:shadow-lime-500/40 hover:scale-105 active:scale-95 inline-flex items-center gap-3 group"
       >
         {{ t('links.conocenos') }}
@@ -24,10 +27,10 @@
   </app-hero-carousel>
 
   <!-- SECCIÓN PRINCIPAL: Rutas, Tracks y Wikiloc -->
-  <section class="max-w-7xl mx-auto py-16 px-4 sm:px-6 lg:px-8">
-    <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-      <!-- Panel de Rutas e Información de la Excursión (8 Columns) -->
-      <div class="lg:col-span-8 space-y-8">
+  <section class="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+    <div class="max-w-4xl mx-auto items-start">
+      <!-- Panel de Rutas e Información de la Excursión -->
+      <div class="space-y-8">
         <!-- Tarjeta Informativa Principal -->
         <div
           class="bg-white rounded-3xl border border-slate-100 shadow-sm p-6 sm:p-10 relative overflow-hidden transition-all duration-300 hover:shadow-md"
@@ -136,6 +139,17 @@
                 {{ lang() === 'es' ? 'Descargar' : 'Deskargatu' }} &rarr;
               </span>
             </a>
+
+            <!-- Botón Wikiloc (Movido) -->
+            <div class="sm:col-span-2">
+              <a
+                href="https://es.wikiloc.com/wikiloc/user.do?id=414919"
+                target="_blank"
+                class="w-full flex items-center justify-center gap-3 bg-lime-500 hover:bg-lime-400 text-slate-950 font-black px-6 py-4 rounded-2xl transition duration-300 text-sm md:text-base shadow-lg shadow-lime-500/15 group-hover:shadow-lime-500/25 transform hover:scale-[1.01] active:scale-99"
+              >
+                {{ t('links.ir_wikiloc') }}
+              </a>
+            </div>
           </div>
 
           <!-- Banner secundario interior -->
@@ -166,56 +180,6 @@
           </div>
         </div>
       </div>
-
-      <!-- Tarjeta Destacada de Wikiloc (4 Columns) -->
-      <div class="lg:col-span-4 space-y-8">
-        <div
-          class="bg-gradient-to-br from-zinc-900 to-zinc-950 rounded-3xl border border-zinc-800 shadow-xl p-8 text-white relative overflow-hidden group"
-        >
-          <!-- Subtle logo glow background -->
-          <div
-            class="absolute -bottom-16 -right-16 w-48 h-48 bg-lime-500/10 rounded-full blur-3xl group-hover:bg-lime-500/15 transition duration-500 pointer-events-none"
-          ></div>
-
-          <div class="flex items-center justify-between mb-8">
-            <span
-              class="bg-lime-500/20 text-lime-400 border border-lime-400/25 text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-lg"
-            >
-              Wikiloc Oficial
-            </span>
-            <span class="flex h-2.5 w-2.5 relative">
-              <span
-                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"
-              ></span>
-              <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-500"></span>
-            </span>
-          </div>
-
-          <div class="h-10 mb-6 flex items-center">
-            <img
-              src="assets/imagenes/wikiloc_logo.jpg"
-              alt="Logo Wikiloc"
-              class="h-9 opacity-95 group-hover:scale-105 duration-300 transition-transform rounded-md object-contain shadow-sm"
-            />
-          </div>
-
-          <p class="text-zinc-300 text-sm font-semibold leading-relaxed mb-8">
-            {{
-              lang() === 'es'
-                ? 'Sigue nuestras rutas guiadas y mapas de senderismo directamente desde nuestra comunidad en Wikiloc con tu smartphone.'
-                : 'Jarraitu gure ibilbide gidatuak eta senderismo mapak zuzenean gure Wikiloc komunitatetik zure smartphone-arekin.'
-            }}
-          </p>
-
-          <a
-            href="https://es.wikiloc.com/wikiloc/user.do?id=414919"
-            target="_blank"
-            class="w-full text-center block bg-lime-500 hover:bg-lime-400 text-slate-950 font-black px-6 py-4 rounded-2xl transition duration-300 text-sm shadow-lg shadow-lime-500/15 group-hover:shadow-lime-500/25 transform hover:scale-[1.01] active:scale-99"
-          >
-            {{ t('links.ir_wikiloc') }}
-          </a>
-        </div>
-      </div>
     </div>
   </section>
 
@@ -244,7 +208,7 @@
           <img
             src="assets/imagenes/gobierno_navarra_logo.webp"
             alt="Gobierno de Navarra"
-            class="h-10 sm:h-16 md:h-24 w-auto object-contain transition duration-300 group-hover:scale-105"
+            class="h-14 sm:h-20 md:h-32 w-auto object-contain transition-transform duration-300 group-hover:scale-110 md:group-hover:scale-110"
           />
         </div>
 
@@ -255,7 +219,7 @@
           <img
             src="assets/imagenes/ayuntamiento_pamplona_logo.png"
             alt="Ayuntamiento de Pamplona"
-            class="h-8 sm:h-12 md:h-20 w-auto object-contain transition duration-300 group-hover:scale-105"
+            class="h-8 sm:h-12 md:h-20 w-auto object-contain transition-transform duration-300 group-hover:scale-110 md:group-hover:scale-110"
           />
         </div>
 
@@ -266,7 +230,7 @@
           <img
             src="assets/imagenes/fundacion_caja_navarra_logo.webp"
             alt="Fundación Caja Navarra"
-            class="h-9 sm:h-14 md:h-[5.5rem] w-auto object-contain transition duration-300 group-hover:scale-105 scale-125 md:scale-150 transform"
+            class="h-9 sm:h-14 md:h-[5.5rem] w-auto object-contain transition-transform duration-300 transform scale-125 md:scale-150 group-hover:scale-[1.4] md:group-hover:scale-[1.65]"
           />
         </div>
       </div>
