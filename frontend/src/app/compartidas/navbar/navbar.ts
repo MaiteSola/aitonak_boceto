@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { TranslationService } from '../../services/translation.service';
 import { AuthService } from '../../services/auth.service';
+import { CarouselService } from '../../services/carousel.service';
 
 @Component({
   selector: 'app-navbar',
@@ -13,9 +14,11 @@ export class Navbar {
   router = inject(Router);
   ts = inject(TranslationService);
   authService = inject(AuthService);
+  carouselService = inject(CarouselService);
   lang = this.ts.lang;
 
   isAuthed = this.authService.isLoggedIn;
+  isAdmin = this.authService.isAdmin;
   username = this.authService.username;
 
   mobileMenuOpen = signal<boolean>(false);
@@ -79,6 +82,12 @@ export class Navbar {
   toggleActividadesSubmenu(e: Event) {
     e.stopPropagation();
     this.actividadesSubmenuOpen.update((prev) => !prev);
+  }
+
+  openAdminCarousel(e?: Event) {
+    if (e) e.preventDefault();
+    this.carouselService.openAdminModal();
+    this.closeAllSubmenus();
   }
 
   logout(e: Event) {

@@ -1,22 +1,79 @@
 <section class="relative group bg-slate-900 animate-fadeIn">
   <div class="relative w-full overflow-hidden" [class]="customHeightClass()">
-    @for (slide of slides; track $index) {
-      <div
-        class="absolute inset-0 transition-all duration-1000 ease-in-out transform"
-        [style.opacity]="activeSlide() === $index ? '1' : '0'"
-        [style.z-index]="activeSlide() === $index ? '10' : '0'"
-        [style.visibility]="activeSlide() === $index ? 'visible' : 'hidden'"
-        [class.scale-100]="activeSlide() === $index"
-        [class.scale-105]="activeSlide() !== $index"
-      >
-        <!-- Background image and overlay -->
-        <img
-          [src]="slide"
-          alt="Fondo interactivo"
-          class="w-full h-full object-cover select-none brightness-70 transition-all duration-1000"
-        />
-        <!-- Subtle Dark Gradient for contrast -->
-        <div class="absolute inset-0 bg-slate-900/20"></div>
+    <!-- BOTÓN DE ADMINISTRAR CARRUSEL (SOLO VISIBLE CUANDO ADMIN ESTÁ LOGUEADO) -->
+    @if (isAdmin()) {
+      <div class="absolute top-4 right-4 sm:top-6 sm:right-6 z-40 pointer-events-auto">
+        <button
+          (click)="openAdminModal()"
+          type="button"
+          id="btn-admin-carrusel"
+          class="group/admin inline-flex items-center gap-2 sm:gap-2.5 bg-slate-950/85 hover:bg-slate-900 text-white hover:text-lime-400 border border-lime-400/50 hover:border-lime-400 px-3.5 sm:px-4 py-2 sm:py-2.5 rounded-2xl shadow-2xl backdrop-blur-md transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer select-none"
+          title="Administrar fotos del carrusel"
+        >
+          <span class="relative flex h-2.5 w-2.5 shrink-0">
+            <span
+              class="animate-ping absolute inline-flex h-full w-full rounded-full bg-lime-400 opacity-75"
+            ></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-lime-500"></span>
+          </span>
+          <svg
+            class="w-4 h-4 text-lime-400 group-hover/admin:rotate-45 transition-transform duration-300 shrink-0"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            stroke-width="2"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"
+            />
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"
+            />
+          </svg>
+          <span class="text-xs sm:text-sm font-bold tracking-wide">Administrar carrusel</span>
+          <span
+            class="hidden md:inline-block text-[10px] bg-lime-500/25 text-lime-300 font-extrabold px-2 py-0.5 rounded-full border border-lime-400/30 uppercase tracking-wider"
+            >Admin</span
+          >
+        </button>
+      </div>
+    }
+
+    <!-- SLIDES DEL CARRUSEL -->
+    @if (slides().length > 0) {
+      @for (slide of slides(); track $index) {
+        <div
+          class="absolute inset-0 transition-all duration-1000 ease-in-out transform"
+          [style.opacity]="activeSlide() === $index ? '1' : '0'"
+          [style.z-index]="activeSlide() === $index ? '10' : '0'"
+          [style.visibility]="activeSlide() === $index ? 'visible' : 'hidden'"
+          [class.scale-100]="activeSlide() === $index"
+          [class.scale-105]="activeSlide() !== $index"
+        >
+          <!-- Background image and overlay -->
+          <img
+            [src]="slide"
+            alt="Fondo interactivo del carrusel"
+            class="w-full h-full object-cover select-none brightness-70 transition-all duration-1000"
+          />
+          <!-- Subtle Dark Gradient for contrast -->
+          <div class="absolute inset-0 bg-slate-900/25"></div>
+        </div>
+      }
+    } @else {
+      <!-- Fallback cuando no hay fotos -->
+      <div class="absolute inset-0 bg-slate-900 flex items-center justify-center text-center p-6">
+        <div class="text-slate-400 space-y-2">
+          <p class="text-base font-bold text-white">No hay fotos en el carrusel</p>
+          <p class="text-xs">
+            Usa el botón de administración para subir fotos en formato JPG o restaurar las
+            predeterminadas.
+          </p>
+        </div>
       </div>
     }
 
@@ -77,24 +134,29 @@
     </div>
 
     <!-- Next & Previous Translucent Navigation Buttons -->
-    <button
-      (click)="prevSlide()"
-      class="hidden md:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
-      aria-label="Previous Slide"
-    >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
-      </svg>
-    </button>
+    @if (slides().length > 1) {
+      <button
+        (click)="prevSlide()"
+        class="hidden md:flex absolute left-4 sm:left-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
+        aria-label="Previous Slide"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
 
-    <button
-      (click)="nextSlide()"
-      class="hidden md:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
-      aria-label="Next Slide"
-    >
-      <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
-        <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
+      <button
+        (click)="nextSlide()"
+        class="hidden md:flex absolute right-4 sm:right-8 top-1/2 -translate-y-1/2 z-30 bg-black/20 backdrop-blur-md hover:bg-lime-500 hover:text-slate-950 text-white p-3 sm:p-4 rounded-full border border-white/10 focus:outline-none transition-all duration-300 md:opacity-0 md:group-hover:opacity-100 hover:scale-110 active:scale-90 shadow-2xl cursor-pointer items-center justify-center"
+        aria-label="Next Slide"
+      >
+        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+        </svg>
+      </button>
+    }
   </div>
+
+  <!-- POP-UP MODAL DE ADMINISTRACIÓN DEL CARRUSEL -->
+  <app-admin-carousel-modal></app-admin-carousel-modal>
 </section>

@@ -67,7 +67,8 @@
           {{ t('nav.bienvenida') }}
         </a>
         <div class="relative group">
-          <a routerLink="/conocenos"
+          <a
+            routerLink="/conocenos"
             (click)="toggleDesktopConocenos($event)"
             [class.!text-lime-700]="conocenosSubmenuOpen()"
             [class.!font-bold]="conocenosSubmenuOpen()"
@@ -201,7 +202,8 @@
 
         <!-- Actividades Dropdown -->
         <div class="relative group">
-          <a routerLink="/actividades"
+          <a
+            routerLink="/actividades"
             (click)="toggleDesktopActividades($event)"
             [class.!text-lime-700]="actividadesSubmenuOpen()"
             [class.!font-bold]="actividadesSubmenuOpen()"
@@ -303,7 +305,8 @@
 
         <!-- Montaña Segura Dropdown -->
         <div class="relative group">
-          <a routerLink="/montana-segura"
+          <a
+            routerLink="/montana-segura"
             (click)="toggleDesktopMontana($event)"
             [class.!text-lime-700]="montanaSeguraSubmenuOpen()"
             [class.!font-bold]="montanaSeguraSubmenuOpen()"
@@ -386,7 +389,7 @@
         @if (!isAuthed()) {
           <a
             routerLink="/area-privada"
-              [queryParams]="{ scroll: 'menu' }"
+            [queryParams]="{ scroll: 'menu' }"
             routerLinkActive="!text-lime-700 !font-bold !border-lime-500 !bg-lime-50/30"
             class="group inline-flex items-center gap-2 border border-slate-200/80 text-slate-700 bg-white hover:text-lime-605 hover:border-lime-500 hover:bg-lime-50/10 px-4 py-2 rounded-xl text-sm font-bold shadow-xs hover:shadow-sm transition-all duration-350"
           >
@@ -445,7 +448,7 @@
             >
               <a
                 routerLink="/area-privada"
-              [queryParams]="{ scroll: 'menu' }"
+                [queryParams]="{ scroll: 'menu' }"
                 routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
                 (click)="closeAllSubmenus()"
                 class="flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
@@ -465,6 +468,27 @@
                 </svg>
                 Mi Área Privada
               </a>
+              @if (isAdmin()) {
+                <button
+                  (click)="openAdminCarousel($event)"
+                  class="w-full text-left flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-lime-700 hover:text-lime-800 hover:bg-lime-50 rounded-xl transition-colors cursor-pointer"
+                >
+                  <svg
+                    class="w-4 h-4 text-lime-600"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                    />
+                  </svg>
+                  Administrar Carrusel
+                </button>
+              }
               <button
                 (click)="logout($event)"
                 class="w-full text-left flex items-center gap-2 px-3 py-2.5 text-sm font-semibold text-rose-600 hover:text-rose-700 hover:bg-rose-50 rounded-xl transition-colors mt-1"
@@ -869,7 +893,7 @@
       @if (!isAuthed()) {
         <a
           routerLink="/area-privada"
-              [queryParams]="{ scroll: 'menu' }"
+          [queryParams]="{ scroll: 'menu' }"
           routerLinkActive="!text-lime-700 !bg-slate-100 !font-bold"
           class="flex items-center gap-3 border border-slate-200/80 text-slate-700 bg-slate-50/50 hover:text-lime-600 hover:bg-lime-50/30 font-bold px-4 py-3 rounded-xl text-base transition duration-150"
           (click)="mobileMenuOpen.set(false)"
@@ -910,9 +934,9 @@
 
           <a
             routerLink="/area-privada"
-              [queryParams]="{ scroll: 'menu' }"
-                routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
-                class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
+            [queryParams]="{ scroll: 'menu' }"
+            routerLinkActive="bg-lime-50 !text-lime-600 font-bold"
+            class="flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-slate-600 hover:text-lime-600 hover:bg-lime-50 rounded-xl transition-colors"
             (click)="mobileMenuOpen.set(false)"
           >
             <svg
@@ -930,6 +954,28 @@
             </svg>
             Mi Área Privada
           </a>
+
+          @if (isAdmin()) {
+            <button
+              (click)="openAdminCarousel($event); mobileMenuOpen.set(false)"
+              class="w-full text-left flex items-center gap-3 px-3 py-2.5 text-sm font-semibold text-lime-700 hover:text-lime-800 hover:bg-lime-50 rounded-xl transition-colors cursor-pointer"
+            >
+              <svg
+                class="w-4 h-4 text-lime-600"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                stroke-width="2"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+              Administrar Carrusel
+            </button>
+          }
 
           <button
             (click)="logout($event); mobileMenuOpen.set(false)"
