@@ -1,13 +1,19 @@
 import { Component, input, signal, OnInit, OnDestroy, inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
+import { CarouselService } from '../../services/carousel.service';
+import { AuthService } from '../../services/auth.service';
+import { AdminCarouselModal } from './admin-carousel-modal/admin-carousel-modal';
 
 @Component({
   selector: 'app-hero-carousel',
   standalone: true,
+  imports: [AdminCarouselModal],
   templateUrl: './hero-carousel.html',
 })
 export class HeroCarousel implements OnInit, OnDestroy {
   private platformId = inject(PLATFORM_ID);
+  carouselService = inject(CarouselService);
+  authService = inject(AuthService);
 
   // Inputs para personalizar el texto central
   title = input<string>('');
@@ -21,18 +27,9 @@ export class HeroCarousel implements OnInit, OnDestroy {
   activeSlide = signal<number>(0);
   private autoPlayInterval: any;
 
-  slides: string[] = [
-    'assets/imagenes/home_monte1.jpg',
-    'assets/imagenes/home_monte2.jpg',
-    'assets/imagenes/home_monte3.jpg',
-    'assets/imagenes/home_monte4.jpg',
-    'assets/imagenes/abodi_1.jpg',
-    'assets/imagenes/belagua_1.jpg',
-    'assets/imagenes/foz.jpg',
-    'assets/imagenes/lakartxela.jpg',
-    'assets/imagenes/navarra_niebla.jpg',
-    'assets/imagenes/ori_navarra.jpg',
-  ];
+  // Reactivo desde CarouselService
+  slides = this.carouselService.slides;
+  isAdmin = this.authService.isAdmin;
 
   ngOnInit() {
     this.startAutoPlay();
@@ -43,11 +40,21 @@ export class HeroCarousel implements OnInit, OnDestroy {
   }
 
   nextSlide() {
-    this.activeSlide.update((curr) => (curr + 1) % this.slides.length);
+    const total = this.slides().length;
+    if (total > 0) {
+      this.activeSlide.update((curr) => (curr + 1) % total);
+    }
   }
 
   prevSlide() {
-    this.activeSlide.update((curr) => (curr - 1 + this.slides.length) % this.slides.length);
+    const total = this.slides().length;
+    if (total > 0) {
+      this.activeSlide.update((curr) => (curr - 1 + total) % total);
+    }
+  }
+
+  openAdminModal() {
+    this.carouselService.openAdminModal();
   }
 
   private startAutoPlay() {
